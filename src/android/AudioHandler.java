@@ -18,6 +18,7 @@
 */
 package org.apache.cordova.media;
 
+import org.elastos.trinity.dapprt.TrinityPlugin;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaResourceApi;
@@ -53,7 +54,7 @@ import java.util.HashMap;
  * 		android_asset: 		file name must start with /android_asset/sound.mp3
  * 		sdcard:				file name is just sound.mp3
  */
-public class AudioHandler extends CordovaPlugin {
+public class AudioHandler extends TrinityPlugin {
 
     public static String TAG = "AudioHandler";
     HashMap<String, AudioPlayer> players;  // Audio player object
