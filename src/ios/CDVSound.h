@@ -20,6 +20,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import <Cordova/CDVPlugin.h>
+#import "TrinityPlugin.h"
 
 enum CDVMediaError {
     MEDIA_ERR_NONE_ACTIVE = 0,
@@ -81,7 +82,7 @@ typedef NSUInteger CDVMediaMsg;
 
 @end
 
-@interface CDVSound : CDVPlugin <AVAudioPlayerDelegate, AVAudioRecorderDelegate>
+@interface CDVSound : TrinityPlugin <AVAudioPlayerDelegate, AVAudioRecorderDelegate>
 {
     NSMutableDictionary* soundCache;
     NSString* currMediaId;
