@@ -32,7 +32,7 @@ id="elastos-trinity-plugins-media"
         <engine name="cordova-android" version=">=6.3.0" />
     </engines>
 
-    <dependency id="elastos-trinity-plugins-file" version="^6.0.0" />
+    <!--dependency id="cordova-plugins-file" version="^6.0.0" /-->
 
     <js-module src="www/MediaError.js" name="MediaError">
         <clobbers target="window.MediaError" />
