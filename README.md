@@ -23,9 +23,9 @@ description: Record and play audio on the device.
 
 |AppVeyor|Travis CI|
 |:-:|:-:|
-|[![Build status](https://ci.appveyor.com/api/projects/status/github/apache/cordova-plugin-media?branch=master)](https://ci.appveyor.com/project/ApacheSoftwareFoundation/cordova-plugin-media)|[![Build Status](https://travis-ci.org/apache/cordova-plugin-media.svg?branch=master)](https://travis-ci.org/apache/cordova-plugin-media)|
+|[![Build status](https://ci.appveyor.com/api/projects/status/github/apache/elastos-trinity-plugins-media?branch=master)](https://ci.appveyor.com/project/ApacheSoftwareFoundation/elastos-trinity-plugins-media)|[![Build Status](https://travis-ci.org/apache/elastos-trinity-plugins-media.svg?branch=master)](https://travis-ci.org/apache/elastos-trinity-plugins-media)|
 
-# cordova-plugin-media
+# elastos-trinity-plugins-media
 
 
 This plugin provides the ability to record and play back audio files on a device.
@@ -49,7 +49,7 @@ function onDeviceReady() {
 ## Installation
 
 ```bash
-cordova plugin add cordova-plugin-media
+cordova plugin add elastos-trinity-plugins-media
 ```
 
 ## Supported Platforms
