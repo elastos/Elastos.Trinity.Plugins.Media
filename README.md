@@ -49,8 +49,9 @@ function onDeviceReady() {
 ## Installation
 
 ```bash
-cordova plugin add elastos-trinity-plugins-media
+ cordova plugin add https://github.com/elastos/Elastos.Trinity.Plugins.Media.git
 ```
+The plugins field of dapp manifest.json adds Media values, such as "plugins": ["XXXX", "Media", "XXXX"]
 
 ## Supported Platforms
 
