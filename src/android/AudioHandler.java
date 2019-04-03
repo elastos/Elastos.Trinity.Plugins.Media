@@ -102,6 +102,7 @@ public class AudioHandler extends TrinityPlugin {
      * @param callbackContext		The callback context used when calling back into JavaScript.
      * @return 				A PluginResult object with a status and message.
      */
+    @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         CordovaResourceApi resourceApi = webView.getResourceApi();
         PluginResult.Status status = PluginResult.Status.OK;
@@ -136,7 +137,14 @@ public class AudioHandler extends TrinityPlugin {
             } catch (IllegalArgumentException e) {
                 fileUriStr = target;
             }
-            this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(fileUriStr));
+            String realPath = null;
+            try {
+                realPath = getCanonicalPath(fileUriStr);
+            } catch (Exception e) {
+                callbackContext.error(e.getLocalizedMessage());
+                return false;
+            }
+            this.startPlayingAudio(args.getString(0), FileHelper.stripFileProtocol(realPath));
         }
         else if (action.equals("seekToAudio")) {
             this.seekToAudio(args.getString(0), args.getInt(1));
@@ -164,7 +172,14 @@ public class AudioHandler extends TrinityPlugin {
         }
         else if (action.equals("create")) {
             String id = args.getString(0);
-            String src = FileHelper.stripFileProtocol(args.getString(1));
+            String realPath = null;
+            try {
+                realPath = getCanonicalPath(args.getString(1));
+            } catch (Exception e) {
+                callbackContext.error(e.getLocalizedMessage());
+                return false;
+            }
+            String src = FileHelper.stripFileProtocol(realPath);
             getOrCreatePlayer(id, src);
         }
         else if (action.equals("release")) {
@@ -192,6 +207,7 @@ public class AudioHandler extends TrinityPlugin {
     /**
      * Stop all audio players and recorders.
      */
+    @Override
     public void onDestroy() {
         if (!players.isEmpty()) {
             onLastPlayerReleased();
@@ -217,6 +233,7 @@ public class AudioHandler extends TrinityPlugin {
      * @param data          The message data
      * @return              Object to stop propagation or null
      */
+    @Override
     public Object onMessage(String id, Object data) {
 
         // If phone message
@@ -256,7 +273,8 @@ public class AudioHandler extends TrinityPlugin {
             if (players.isEmpty()) {
                 onFirstPlayerCreated();
             }
-            ret = new AudioPlayer(this, id, file);
+            String temppath  = getDataPath();
+            ret = new AudioPlayer(this, id, file, temppath);
             players.put(id, ret);
         }
         return ret;
