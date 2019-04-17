@@ -241,7 +241,17 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
 - (void)create:(CDVInvokedUrlCommand*)command
 {
     NSString* mediaId = [command argumentAtIndex:0];
-    NSString* resourcePath = [command argumentAtIndex:1];
+
+    NSString* relativePath = [command argumentAtIndex:1];
+    /*get absolute path*/
+    NSError *err = nil;
+    NSString* resourcePath = [self getCanonicalPath:relativePath error:&err];
+    if(err != nil){
+        NSLog(@"can not get real path");
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:err.userInfo[NSLocalizedDescriptionKey]];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return ;
+    }
 
     CDVAudioFile* audioFile = [self audioFileForResource:resourcePath withId:mediaId doValidation:YES forRecording:NO suppressValidationErrors:YES];
 
@@ -346,7 +356,17 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
 
 #pragma unused(callbackId)
     NSString* mediaId = [command argumentAtIndex:0];
-    NSString* resourcePath = [command argumentAtIndex:1];
+
+    NSString* relativePath = [command argumentAtIndex:1];
+    /*get absolute path*/
+    NSError *err = nil;
+    NSString* resourcePath = [self getCanonicalPath:relativePath error:&err];
+    if(err != nil){
+        NSLog(@"can not get real path");
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:err.userInfo[NSLocalizedDescriptionKey]];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return ;
+    }
     NSDictionary* options = [command argumentAtIndex:2 withDefault:nil];
 
     BOOL bError = NO;
@@ -658,9 +678,20 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
     NSString* callbackId = command.callbackId;
 
 #pragma unused(callbackId)
+    
+    NSString* relativePath = [command argumentAtIndex:1];
+    /*get absolute path*/
+    NSError *err = nil;
+    NSString* resourcePath = [self getCanonicalPath:relativePath error:&err];
+    if(err != nil){
+        NSLog(@"can not get real path");
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:err.userInfo[NSLocalizedDescriptionKey]];
+        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+        return ;
+    }
 
     NSString* mediaId = [command argumentAtIndex:0];
-    CDVAudioFile* audioFile = [self audioFileForResource:[command argumentAtIndex:1] withId:mediaId doValidation:YES forRecording:YES];
+    CDVAudioFile* audioFile = [self audioFileForResource:resourcePath withId:mediaId doValidation:YES forRecording:YES];
     __block NSString* errorMsg = @"";
 
     if ((audioFile != nil) && (audioFile.resourceURL != nil)) {
