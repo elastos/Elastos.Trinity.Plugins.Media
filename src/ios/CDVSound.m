@@ -678,7 +678,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
     NSString* callbackId = command.callbackId;
 
 #pragma unused(callbackId)
-    
+
     NSString* relativePath = [command argumentAtIndex:1];
     /*get absolute path*/
     NSError *err = nil;
@@ -870,7 +870,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
 {
     /* https://issues.apache.org/jira/browse/CB-11513 */
     NSMutableArray* keysToRemove = [[NSMutableArray alloc] init];
-    
+
     for(id key in [self soundCache]) {
         CDVAudioFile* audioFile = [[self soundCache] objectForKey:key];
         if (audioFile != nil) {
@@ -882,9 +882,9 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
             }
         }
     }
-    
+
     [[self soundCache] removeObjectsForKeys:keysToRemove];
-    
+
     // [[self soundCache] removeAllObjects];
     // [self setSoundCache:nil];
     [self setAvSession:nil];
@@ -1000,7 +1000,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
             param=[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         }
         NSString* jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%@);",
-              @"cordova.require('cordova-plugin-media.Media').onStatus",
+              @"cordova.require('elastos-trinity-plugins-media.Media').onStatus",
               mediaId, (int)what, param];
         [self.commandDelegate evalJs:jsString];
     }
