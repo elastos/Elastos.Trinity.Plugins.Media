@@ -21,10 +21,6 @@ description: Record and play audio on the device.
 #         under the License.
 -->
 
-|AppVeyor|Travis CI|
-|:-:|:-:|
-|[![Build status](https://ci.appveyor.com/api/projects/status/github/apache/elastos-trinity-plugins-media?branch=master)](https://ci.appveyor.com/project/ApacheSoftwareFoundation/elastos-trinity-plugins-media)|[![Build Status](https://travis-ci.org/apache/elastos-trinity-plugins-media.svg?branch=master)](https://travis-ci.org/apache/elastos-trinity-plugins-media)|
-
 # elastos-trinity-plugins-media
 
 
@@ -48,17 +44,12 @@ function onDeviceReady() {
 
 ## Installation
 
-```bash
- cordova plugin add https://github.com/elastos/Elastos.Trinity.Plugins.Media.git
-```
-The plugins field of dapp manifest.json adds Media values, such as "plugins": ["XXXX", "Media", "XXXX"]
+    The plugins field of dapp manifest.json adds Media values, such as "plugins": ["XXXX", "Media", "XXXX"]
 
 ## Supported Platforms
 
 - Android
 - iOS
-- Windows
-- Browser
 
 ## Media
 
@@ -513,7 +504,6 @@ Starts recording an audio file.
 
 - Android
 - iOS
-- Windows
 
 ### Quick Example
 
@@ -557,7 +547,7 @@ function recordAudio() {
 
 This plugins requires the following usage description:
 
-* `NSMicrophoneUsageDescription` describes the reason that the app accesses the user's microphone. 
+* `NSMicrophoneUsageDescription` describes the reason that the app accesses the user's microphone.
 
 To add this entry into the `info.plist`, you can use the `edit-config` tag in the `config.xml` like this:
 
@@ -566,14 +556,6 @@ To add this entry into the `info.plist`, you can use the `edit-config` tag in th
     <string>need microphone access to record sounds</string>
 </edit-config>
 ```
-
-### Windows Quirks
-
-- Windows devices can use MP3, M4A and WMA formats for recorded audio. However in most cases it is not possible to use MP3 for audio recording on _Windows Phone 8.1_ devices, because an MP3 encoder is [not shipped with Windows Phone](https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.mediaproperties.mediaencodingprofile.createmp3.aspx).
-
-- If a full path is not provided, the recording is placed in the `AppData/temp` directory. This can be accessed via the `File` API using `LocalFileSystem.TEMPORARY` or `ms-appdata:///temp/<filename>` URI.
-
-- Any subdirectory specified at record time must already exist.
 
 ## media.stop
 
@@ -619,7 +601,6 @@ Stops recording an audio file.
 
 - Android
 - iOS
-- Windows
 
 ### Quick Example
 
